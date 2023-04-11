@@ -12,7 +12,9 @@ export class API {
         )
     }
     enrutarPeticiones(){
-       this.app.use('/',rutas)
+        //para poderlo usar y que te salga en la conosolaa.....
+        this.app.use(express.json())
+        this.app.use('/',rutas)
     }
     conectarConBD(){}
 
