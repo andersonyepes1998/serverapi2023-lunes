@@ -1,5 +1,6 @@
 import express from 'express'
 import { ControladorHabitaciones } from '../controllers/ControladorHabitaciones.js'
+import { ControladorReservas } from '../controllers/ControladorReserva.js'
 
 let controladorHabitaciones=new ControladorHabitaciones()
 
@@ -11,3 +12,11 @@ rutas.get('/buscarhabitaciones',controladorHabitaciones.buscandoHabitacion)
 rutas.get('/buscarhabitacion/:idhabitacion',controladorHabitaciones.buscandoHabitaciones)
 rutas.post('/registrarhabitacion',controladorHabitaciones.registrandoHabitacion)
 rutas.put('/editarhabitacion/:idhabitacion',controladorHabitaciones.editandoHabitacion)
+
+//CREAMOS LA INSTANCIA PARA LAS RESERVAS....
+let controladorReservas = new ControladorReservas()
+
+rutas.get('/buscareserva', controladorReservas.buscandoReserva)
+rutas.get('/buscareservas/:idreservas', controladorReservas.buscandoReservas)
+rutas.post('/creareservas', controladorReservas.creandoReservas)
+rutas.put('/editareserva',controladorReservas.editandoReserva)
