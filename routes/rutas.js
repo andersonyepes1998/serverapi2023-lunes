@@ -8,8 +8,8 @@ let controladorHabitaciones=new ControladorHabitaciones()
 //DEL API REST
 export let rutas=express.Router()
 
-rutas.get('/buscarhabitaciones',controladorHabitaciones.buscandoHabitacion)
-rutas.get('/buscarhabitacion/:idhabitacion',controladorHabitaciones.buscandoHabitaciones)
+rutas.get('/buscarhabitaciones',controladorHabitaciones.buscandoHabitaciones)
+rutas.get('/buscarhabitacion/:idhabitacion',controladorHabitaciones.buscandoHabitacion)
 rutas.post('/registrarhabitacion',controladorHabitaciones.registrandoHabitacion)
 rutas.put('/editarhabitacion/:idhabitacion',controladorHabitaciones.editandoHabitacion)
 

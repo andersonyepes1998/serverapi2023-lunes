@@ -20,7 +20,7 @@ export class ControladorHabitaciones{
             let idHabitacion=peticion.params.idhabitacion
             console.log(idHabitacion)
             respuesta.status(200).json({
-                "mensaje":"Exito buscando la habitacion..."
+                "mensaje":"Exito buscando la habitacion..."+idHabitacion
             })
         }
         catch(error){
