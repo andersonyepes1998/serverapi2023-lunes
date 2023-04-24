@@ -16,7 +16,7 @@ rutas.put('/editarhabitacion/:idhabitacion',controladorHabitaciones.editandoHabi
 //CREAMOS LA INSTANCIA PARA LAS RESERVAS....
 let controladorReservas = new ControladorReservas()
 
-rutas.get('/buscareserva', controladorReservas.buscandoReserva)
-rutas.get('/buscareservas/:idreservas', controladorReservas.buscandoReservas)
+rutas.get('/buscareserva', controladorReservas.buscandoReservas)
+rutas.get('/buscareservas/:idreservas', controladorReservas.buscandoReserva)
 rutas.post('/creareservas', controladorReservas.creandoReservas)
 rutas.put('/editareserva',controladorReservas.editandoReserva)
