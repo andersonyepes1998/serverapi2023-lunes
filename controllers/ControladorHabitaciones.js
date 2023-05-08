@@ -2,15 +2,32 @@ import { ServicioHabitacion } from "../services/ServicioHabitacion.js"
 
 export class ControladorHabitaciones{
     constructor(){}
+
+    
     async registrandoHabitacion(peticion,respuesta){
         //los codigos de respuestas del protocolo http de vamos al inspeccionador y despues al network
+        let datosHabitacion=peticion.body
         let objetoserviciohabitacion = new ServicioHabitacion()
         try{
-            let datosHabitacion=peticion.body
-            await objetoserviciohabitacion.registrar(datosHabitacion);
-            respuesta.status(200).json({
+
+            if(datosHabitacion.precio < 150 && datosHabitacion.numeropersonas<2){
+                respuesta.status(400).json({
+                    "mensaje":"Revisa la cantidad de persona maxima de personas..."
+                })
+            }else if(datosHabitacion.precio < 150){
+                respuesta.status(400).json({
+                    "mensaje":"Revisa el precio por noche..."
+                })
+            }else if(datosHabitacion.numeropersonas<2){
+                respuesta.status(400).json({
+                    "mensaje":"Debe ser mas gente..."
+                })
+            }else{
+                await objetoserviciohabitacion.registrar(datosHabitacion);
+                respuesta.status(200).json({
                 "mensaje":"Exito agreando datos..."
             })
+            }
         }
         catch(error){
             respuesta.status(400).json({
@@ -18,6 +35,8 @@ export class ControladorHabitaciones{
             })
         }
     }
+
+
     async buscandoHabitacion(peticion,respuesta){
         let objetoserviciohabitacion = new ServicioHabitacion()
         try{

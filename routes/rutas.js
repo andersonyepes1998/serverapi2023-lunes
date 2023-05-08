@@ -17,6 +17,6 @@ rutas.put('/editarhabitacion/:idhabitacion',controladorHabitaciones.editandoHabi
 let controladorReservas = new ControladorReservas()
 
 rutas.get('/buscareserva', controladorReservas.buscandoReservas)
-rutas.get('/buscareservas/:idreservas', controladorReservas.buscandoReserva)
+rutas.get('/buscareservas/:idReserva', controladorReservas.buscandoReserva)
 rutas.post('/creareservas', controladorReservas.creandoReservas)
-rutas.put('/editareserva',controladorReservas.editandoReserva)
+rutas.put('/editareserva/:idReserva',controladorReservas.editandoReserva)
