@@ -40,10 +40,6 @@ export class ControladorReservas{
         let datosReserva=req.body
         let servicioReserva = new ServicioReserva()
         try{
-
-            if(datosReserva.idReserva)
-
-
             await servicioReserva.crearReserva(datosReserva)
             console.log(datosReserva)
             res.status(200).json({

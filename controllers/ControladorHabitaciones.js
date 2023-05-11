@@ -22,6 +22,8 @@ export class ControladorHabitaciones{
                 respuesta.status(400).json({
                     "mensaje":"Debe ser mas gente..."
                 })
+            }else if(!datosHabitacion.precio){
+
             }else{
                 await objetoserviciohabitacion.registrar(datosHabitacion);
                 respuesta.status(200).json({
@@ -30,6 +32,11 @@ export class ControladorHabitaciones{
             }
         }
         catch(error){
+
+            if(!datosHabitacion.precio){
+                
+            }
+
             respuesta.status(400).json({
                 "mensaje":"Fallamos en la operacion"+error
             })
