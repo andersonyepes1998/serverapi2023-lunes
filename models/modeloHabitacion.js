@@ -22,6 +22,10 @@ const Habitacion =  new Schema({
     numeropersonas:{
         type:Number,
         required:true
+    },
+    estado:{
+        type:Boolean,
+        required:true
     }
 })
 

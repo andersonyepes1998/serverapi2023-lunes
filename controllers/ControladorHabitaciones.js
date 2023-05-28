@@ -9,8 +9,25 @@ export class ControladorHabitaciones{
         let datosHabitacion=peticion.body
         let objetoserviciohabitacion = new ServicioHabitacion()
         try{
+            const{nombre, foto, descripcion, precio, numeropersonas} = peticion.body;
 
-            if(datosHabitacion.precio < 150 && datosHabitacion.numeropersonas<2){
+            if(nombre == ''){
+                respuesta.status(400);
+                respuesta.send({error:'El nombre esta vacio, es obligatorio...'})
+            }if (foto == '') {
+                respuesta.status(400);
+                respuesta.send({error:'La foto es obligatoria...'})
+            }if(descripcion == ''){
+                respuesta.status(400);
+                respuesta.send({error:'La descripcion es obligatorio...'})
+            }if (precio == '') {
+                respuesta.status(400);
+                respuesta.send({error:'El precio es obligatorio...'})
+            }if (numeropersonas == '') {
+                respuesta.status(400);
+                respuesta.send({error:'El numero de personas es obligatorio...'})
+
+            }if(datosHabitacion.precio < 150 && datosHabitacion.numeropersonas<2){
                 respuesta.status(400).json({
                     "mensaje":"Revisa la cantidad de persona maxima de personas..."
                 })
@@ -22,8 +39,6 @@ export class ControladorHabitaciones{
                 respuesta.status(400).json({
                     "mensaje":"Debe ser mas gente..."
                 })
-            }else if(!datosHabitacion.precio){
-
             }else{
                 await objetoserviciohabitacion.registrar(datosHabitacion);
                 respuesta.status(200).json({
@@ -32,11 +47,7 @@ export class ControladorHabitaciones{
             }
         }
         catch(error){
-
-            if(!datosHabitacion.precio){
-                
-            }
-
+            
             respuesta.status(400).json({
                 "mensaje":"Fallamos en la operacion"+error
             })
