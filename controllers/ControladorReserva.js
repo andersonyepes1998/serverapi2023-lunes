@@ -47,13 +47,19 @@ export class ControladorReservas{
         let servicioReserva = new ServicioReserva()
         let objetoHabitacion = new ServicioHabitacion();
         let habitacion = await objetoHabitacion.buscarPorId(modelReser.idHabitacion);
-        console.log(habitacion)
+        console.log(habitacion);
+
+        let fechaInicio = modelReser.fechainicioreserva;
+        let fechaFinal = modelReser.fechafinalreserva;
+        let calculoDias = objetoHabitacion
+
+
 
         try{
             // const{ nombrecliente, apellidocliente, telefonocliente, fechainicioreserva, fechafinalreserva, numeroadultos, numeroniños,totalpersonas, idHabitacion } = peticion.body; 
             if ( habitacion === null ) {
                 return res.status(400).json({
-                    "mensaje":"No se puedo encontrar la habitacion a reservar"
+                    "mensaje":"No se pudo encontrar la habitacion para reservar"
                 })
             }else{
                if(habitacion.estado != true){

@@ -38,6 +38,10 @@ const Reserva =  new Schema({
     idHabitacion:{
         type:String,
         required:true
+    },
+    costo:{
+        type:Number,
+        required:true || false
     }
 })
 
