@@ -27,7 +27,7 @@ export class ControladorHabitaciones{
                 respuesta.status(400);
                 respuesta.send({error:'El numero de personas es obligatorio...'})
 
-            }if(datosHabitacion.precio < 150 && datosHabitacion.numeropersonas<2){
+            }if(datosHabitacion.precio < 150 && datosHabitacion.numeropersonas<5){
                 respuesta.status(400).json({
                     "mensaje":"Revisa la cantidad de persona maxima de personas..."
                 })
@@ -35,7 +35,7 @@ export class ControladorHabitaciones{
                 respuesta.status(400).json({
                     "mensaje":"Revisa el precio por noche..."
                 })
-            }else if(datosHabitacion.numeropersonas<2){
+            }else if(datosHabitacion.numeropersonas<5){
                 respuesta.status(400).json({
                     "mensaje":"Debe ser mas gente..."
                 })

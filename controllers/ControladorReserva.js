@@ -43,23 +43,30 @@ export class ControladorReservas{
     async creandoReservas(req,res){
         let modelReser = new modeloReseva();
         modelReser=req.body
-        // let datosReserva=req.body
         let servicioReserva = new ServicioReserva()
         let objetoHabitacion = new ServicioHabitacion();
         let habitacion = await objetoHabitacion.buscarPorId(modelReser.idHabitacion);
-        console.log(habitacion);
-
-        let fechaInicio = modelReser.fechainicioreserva;
-        let fechaFinal = modelReser.fechafinalreserva;
-        let calculoDias = objetoHabitacion
-
-
+        console.log(modelReser)
+        let fechainicioreserva = new Date(modelReser.fechainicioreserva).getTime()
+        let fechafinalreserva = new Date(modelReser.fechafinalreserva).getTime()
+        let dias = fechafinalreserva-fechainicioreserva
+        dias= dias/(1000*60*60*24)
+        Math.round(dias)
 
         try{
-            // const{ nombrecliente, apellidocliente, telefonocliente, fechainicioreserva, fechafinalreserva, numeroadultos, numeroniños,totalpersonas, idHabitacion } = peticion.body; 
+            if (fechainicioreserva>fechafinalreserva){
+                return res.status(400).json({
+                    "mensaje":"la fecha de inicio no puede ser mayor de la fecha final"
+                })
+            }else if(modelReser.numeroadultos + modelReser.numeroniños > habitacion.numeropersonas ){
+                return res.status(400).json({
+                    "mensaje":"El número de personas excede la capacidad de la habitación"
+                })
+            }
+            else{
             if ( habitacion === null ) {
                 return res.status(400).json({
-                    "mensaje":"No se pudo encontrar la habitacion para reservar"
+                    "mensaje":"No se puedo encontrar la habitacion a reservar"
                 })
             }else{
                if(habitacion.estado != true){
@@ -68,15 +75,15 @@ export class ControladorReservas{
                 })
                }else{
                 await servicioReserva.crearReserva(modelReser)
-                console.log(modelReser)
+                habitacion.estado=false
+                await objetoHabitacion.editar(modelReser.idHabitacion,habitacion)
                 res.status(200).json({
-                    "mensaje":"La habitacion se encuntra disponible. Exito agreando una reserva..."
+                    "mensaje":"La habitacion se encuentra disponible. Exito agreando reserva..."
                 })
                }
             }
-            
         }
-
+        }
         catch(error){
             res.status(400).json({
                 "mensaje":"Fallamos en la operacion de la reserva"+error
@@ -84,6 +91,7 @@ export class ControladorReservas{
         }
     }
 
+    
     async editandoReserva(req,res){
         let datosReserva=req.body;
         let idReserva=req.params.idReserva;
